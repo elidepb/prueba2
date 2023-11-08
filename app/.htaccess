@@ -1,0 +1,15 @@
+<IfModule authz_core_module>
+    Require all denied
+</IfModule>
+<IfModule !authz_core_module>
+    Deny from all
+</IfModule>
+# Habilitar reescritura de URLs
+RewriteEngine On
+
+# Si la solicitud no se refiere a un archivo o directorio existente
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Redirige todas las solicitudes a index.php/ y envía la URL como un parámetro
+RewriteRule ^(.*)$ index.php/$1 [L]
